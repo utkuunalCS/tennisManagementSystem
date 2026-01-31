@@ -1,0 +1,23 @@
+<div class="match-lineup" id="lineup-grid">
+  <h2>Match Lineup</h2>
+  
+  <div class="matches-grid">
+    <mat-card class="match-card" *ngFor="let match of matches">
+      <mat-card-header>
+        <mat-card-title>Match {{ match.matchNumber }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="match-slots">
+          <app-match-slot
+            *ngFor="let slot of match.slots"
+            [slot]="slot"
+            [slotIndex]="getSlotIndex(slot)"
+            [usedPlayerIds]="usedPlayerIds"
+            (playerDropped)="onPlayerDropped($event)"
+            (playerRemoved)="onPlayerRemoved($event)">
+          </app-match-slot>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

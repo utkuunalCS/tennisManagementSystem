@@ -1,0 +1,22 @@
+<mat-toolbar color="primary" class="app-toolbar">
+  <span class="toolbar-title">
+    <mat-icon>sports_tennis</mat-icon>
+    {{ title }}
+  </span>
+  <span class="toolbar-spacer"></span>
+  <nav class="toolbar-nav">
+    <a mat-button routerLink="/players" routerLinkActive="active-link">
+      <mat-icon>people</mat-icon>
+      Players
+    </a>
+    <a mat-button routerLink="/lineup-builder" routerLinkActive="active-link">
+      <mat-icon>grid_view</mat-icon>
+      Lineup Builder
+    </a>
+  </nav>
+</mat-toolbar>
+
+<main class="app-main">
+  <router-outlet />
+</main>
+

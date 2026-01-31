@@ -1,0 +1,22 @@
+<div 
+  class="match-slot"
+  [class.filled]="slot.player"
+  cdkDropList
+  [cdkDropListEnterPredicate]="canDrop"
+  (cdkDropListDropped)="onDrop($event)">
+  
+  <div class="slot-content" *ngIf="!slot.player">
+    <span class="placeholder">{{ placeholderText }}</span>
+  </div>
+
+  <div class="slot-content filled-content" *ngIf="slot.player">
+    <span class="player-name">{{ playerName }}</span>
+    <button 
+      mat-icon-button 
+      class="remove-button" 
+      (click)="removePlayer()"
+      title="Remove player">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>

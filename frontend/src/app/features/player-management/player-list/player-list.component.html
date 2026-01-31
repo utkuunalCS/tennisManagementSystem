@@ -1,0 +1,131 @@
+<mat-card class="player-list-card">
+  <mat-card-header>
+    <mat-card-title>Player List</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Filter Section -->
+    <div class="filter-container">
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Search Player</mat-label>
+        <input
+          matInput
+          [(ngModel)]="searchText"
+          (ngModelChange)="onSearchChange()"
+          placeholder="Enter player name"
+        />
+        <mat-icon matPrefix>search</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Skill Level</mat-label>
+        <mat-select
+          [(ngModel)]="selectedSkillLevel"
+          (selectionChange)="onSkillLevelChange()"
+        >
+          <mat-option *ngFor="let level of skillLevels" [value]="level">
+            {{ level }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Gender</mat-label>
+        <mat-select
+          [(ngModel)]="selectedGender"
+          (selectionChange)="onGenderChange()"
+        >
+          <mat-option *ngFor="let gender of genders" [value]="gender">
+            {{ gender }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Table Section -->
+    <div class="table-container">
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        matSort
+        class="player-table"
+      >
+        <!-- First Name Column -->
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+          <td mat-cell *matCellDef="let player">{{ player.firstName }}</td>
+        </ng-container>
+
+        <!-- Last Name Column -->
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+          <td mat-cell *matCellDef="let player">{{ player.lastName }}</td>
+        </ng-container>
+
+        <!-- Skill Level Column -->
+        <ng-container matColumnDef="skillLevel">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Skill Level</th>
+          <td mat-cell *matCellDef="let player">
+            <mat-chip [ngClass]="getSkillLevelClass(player.skillLevel)">
+              {{ getSkillLevelDisplay(player.skillLevel) }}
+            </mat-chip>
+          </td>
+        </ng-container>
+
+        <!-- Gender Column -->
+        <ng-container matColumnDef="gender">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Gender</th>
+          <td mat-cell *matCellDef="let player">
+            <div class="gender-cell">
+              <mat-icon [class.male-icon]="player.gender === Gender.MALE" 
+                        [class.female-icon]="player.gender === Gender.FEMALE">
+                {{ getGenderIcon(player.gender) }}
+              </mat-icon>
+              <span>{{ getGenderDisplay(player.gender) }}</span>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Matches Played Column -->
+        <ng-container matColumnDef="matchesPlayed">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Matches Played</th>
+          <td mat-cell *matCellDef="let player">{{ player.matchesPlayed }}</td>
+        </ng-container>
+
+        <!-- Matches Won Column -->
+        <ng-container matColumnDef="matchesWon">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Matches Won</th>
+          <td mat-cell *matCellDef="let player">
+            <span class="matches-won">{{ player.matchesWon }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Matches Lost Column -->
+        <ng-container matColumnDef="matchesLost">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Matches Lost</th>
+          <td mat-cell *matCellDef="let player">
+            <span class="matches-lost">{{ player.matchesLost }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Win Percentage Column -->
+        <ng-container matColumnDef="winPercentage">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Win %</th>
+          <td mat-cell *matCellDef="let player">
+            <span class="win-percentage">{{ player.winPercentage }}%</span>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <!-- No Data Row -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">
+            No players found matching the current filters
+          </td>
+        </tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>
