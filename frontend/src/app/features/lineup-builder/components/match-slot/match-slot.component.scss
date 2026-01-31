@@ -1,0 +1,69 @@
+.match-slot {
+  min-height: 60px;
+  border: 2px dashed #bdbdbd;
+  border-radius: 6px;
+  background-color: #fafafa;
+  transition: all 0.2s ease;
+  position: relative;
+
+  &.cdk-drop-list-dragging {
+    border-color: #2196f3;
+    background-color: #e3f2fd;
+  }
+
+  &.filled {
+    border-style: solid;
+    border-color: #4caf50;
+    background-color: #e8f5e9;
+  }
+
+  .slot-content {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+
+    .placeholder {
+      color: #757575;
+      font-size: 13px;
+      text-align: center;
+      font-style: italic;
+    }
+
+    &.filled-content {
+      justify-content: space-between;
+
+      .player-name {
+        font-weight: 500;
+        color: #2e7d32;
+        font-size: 14px;
+        flex: 1;
+      }
+
+      .remove-button {
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        flex-shrink: 0;
+
+        mat-icon {
+          font-size: 18px;
+          width: 18px;
+          height: 18px;
+          line-height: 18px;
+        }
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
+
+  &.cdk-drop-list-receiving {
+    border-color: #4caf50;
+    background-color: #c8e6c9;
+    border-style: solid;
+  }
+}

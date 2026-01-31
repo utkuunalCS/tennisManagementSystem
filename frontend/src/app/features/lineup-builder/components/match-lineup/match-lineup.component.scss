@@ -1,0 +1,38 @@
+.match-lineup {
+  h2 {
+    margin: 0 0 20px 0;
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .matches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .match-card {
+    mat-card-header {
+      margin-bottom: 15px;
+
+      mat-card-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #1976d2;
+      }
+    }
+
+    mat-card-content {
+      .match-slots {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  }
+}

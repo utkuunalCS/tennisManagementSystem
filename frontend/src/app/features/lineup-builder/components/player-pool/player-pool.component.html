@@ -1,0 +1,19 @@
+<div class="player-pool">
+  <h2>Player Pool</h2>
+  
+  <div class="player-groups">
+    <div class="player-group" *ngFor="let group of playerGroups">
+      <h3>{{ group.title }}</h3>
+      <div class="player-list">
+        <div 
+          class="player-card"
+          *ngFor="let player of group.players"
+          [cdkDragData]="player"
+          cdkDrag
+          [class.used]="isPlayerUsed(player.id)">
+          <span class="player-name">{{ getPlayerName(player) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
